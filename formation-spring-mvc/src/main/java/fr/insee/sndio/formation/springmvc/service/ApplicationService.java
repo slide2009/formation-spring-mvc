@@ -3,8 +3,11 @@ package fr.insee.sndio.formation.springmvc.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import fr.insee.sndio.formation.springmvc.model.Application;
 
+@Service
 public class ApplicationService {
 
 	public ApplicationService() {		
