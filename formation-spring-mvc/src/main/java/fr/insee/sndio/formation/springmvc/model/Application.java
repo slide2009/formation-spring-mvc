@@ -8,6 +8,9 @@ public class Application {
 		this.description = description;
 	}
 
+	public Application() {
+	}
+
 	private Long id;	
 	private String nom;
 	private String description;

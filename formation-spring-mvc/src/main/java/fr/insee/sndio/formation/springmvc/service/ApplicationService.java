@@ -18,9 +18,22 @@ public class ApplicationService {
 
 	private List<Application> listeApplications = new ArrayList<>();
 	
+	
 	public List<Application> listerApplications() {
 		return listeApplications;
 	}
 	
+	public List<Application> majApplications(Application application) {
+		listeApplications.stream()
+		.filter(appli -> appli.getId().equals(application.getId()))
+		.findFirst()
+		.ifPresentOrElse(appli -> {
+					appli.setNom(application.getNom());
+					appli.setDescription(application.getDescription());
+		}, 
+		() -> listeApplications.add(application));
+		
+		return listeApplications;
+	}
 	
 }
