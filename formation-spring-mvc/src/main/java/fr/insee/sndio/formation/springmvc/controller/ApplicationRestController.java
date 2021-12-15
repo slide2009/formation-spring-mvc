@@ -26,10 +26,13 @@ public class ApplicationRestController {
 	
 	@DeleteMapping("{idApplication}")
 	public List<Application> delete(@PathVariable Long idApplication) {
-		List<Application> listeModif = applicationService.listerApplications().stream()
-				.filter(appli -> !appli.getId().equals(idApplication))
-				.collect(Collectors.toList());
-		applicationService.setListeApplications(listeModif);
-		return listeModif;
+		List<Application> listeApplications = applicationService.listerApplications();
+		listeApplications.removeIf(appli -> appli.getId().equals(idApplication));
+		return listeApplications;
+//		List<Application> listeModif = listerApplications.stream()
+//				.filter(appli -> !appli.getId().equals(idApplication))
+//				.collect(Collectors.toList());		
+//		applicationService.setListeApplications(listeModif);
+//		return listeModif;
 	}
 }
