@@ -7,16 +7,17 @@
 		<title>Spring MVC</title>
 	</head>
 	<body>
-		Message : ${message}
-		
+	<div>
+		Nombre d'applis : ${nombreApplications}
+	</div>
 		<table>
-		<c:forEach items="${listeApplications}" var="application">
-			<tr>
-				<td>${application.id}</td>
-				<td>${application.nom}</td>
-				<td>${application.description}</td>
-			</tr>
-		</c:forEach>
+			<c:forEach items="${listeApplications}" var="application">
+				<tr>
+					<td>${application.id}</td>
+					<td>${application.nom}</td>
+					<td>${application.description}</td>
+				</tr>
+			</c:forEach>
 		</table>
 	</body>
 </html>

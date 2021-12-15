@@ -1,12 +1,16 @@
 package fr.insee.sndio.formation.springmvc.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +38,15 @@ public class ApplicationController {
 		model.addAttribute("listeApplications", listeApplications);
 		return "applications";
 	}
-
+	
+	@GetMapping("tableau")
+	public String listerApplications(Model model, HttpSession session) {
+//		session.setAttribute("message", LocalDate.now());
+		model.addAttribute("listeApplications", applicationService.listerApplications());
+		return "applications";
+	}
+	
+	
 	@GetMapping
 	public String prepareFormulaire(Model model) {
 		model.addAttribute("application", new Application());
@@ -42,14 +54,17 @@ public class ApplicationController {
 	}
 	
 	@PostMapping("enregistrer")
-	public String enregistrer(Application application, RedirectAttributes redirectAttributes) {	
+	public String enregistrer(Application application, RedirectAttributes redirectAttributes, Model model, HttpSession session) {
+		 LocalDate message = (LocalDate) session.getAttribute("message");
+		 session.setAttribute("message", message.plusDays(1));
 		// traitement métier, peu importe
 		List<Application> listeApplications = applicationService.listerApplications();
 		listeApplications.add(application);
+		model.addAttribute("comptage", listeApplications.size());
 		
 //		 FlashAttributes dispo pour la vue qui reprend la main 
-		redirectAttributes.addFlashAttribute("comptage", listeApplications.size());
-		redirectAttributes.addFlashAttribute("message", "Application enregistrée");
+//		redirectAttributes.addFlashAttribute("comptage", listeApplications.size());
+//		redirectAttributes.addFlashAttribute("message", "Application enregistrée");
 		return "redirect:/applications";
 	 }
 	

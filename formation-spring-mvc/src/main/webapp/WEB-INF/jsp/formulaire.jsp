@@ -12,7 +12,9 @@
 		<div>
 			Comptage : ${comptage}
 		</div>
+		<div>
 		Message : ${message}
+		</div>
 		<form:form action="applications/enregistrer" modelAttribute="application">
 			<label for="id">Id</label>
 			<form:input id="id" path="id"/>

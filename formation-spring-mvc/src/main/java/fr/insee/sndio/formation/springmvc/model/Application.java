@@ -1,5 +1,9 @@
 package fr.insee.sndio.formation.springmvc.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Application {
 
 	public Application(Long id, String nom, String description) {
@@ -11,6 +15,7 @@ public class Application {
 	public Application() {
 	}
 
+	@Id
 	private Long id;	
 	private String nom;
 	private String description;
